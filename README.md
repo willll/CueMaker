@@ -1,2 +1,2 @@
 # CueMaker
-Cue Generator tools for Sega Saturn
+Cue Generator tool for Sega Saturn
