@@ -28,5 +28,4 @@ target_link_libraries( cuemaker LINK_PUBLIC
         ${CTEMPLATE_LIBRARIES}
         Threads::Threads)
 
-
-#install(TARGETS divider DESTINATION ${DIVISIBLE_INSTALL_BIN_DIR})
+install(TARGETS cuemaker DESTINATION .)
