@@ -48,10 +48,10 @@ void generate_cue(const CliOptions & options) {
     ct::TemplateDictionary dict("cue_file");
     std::string output;
 
-    ctemplate::StringToTemplateCache("cue_template", template_cue, ctemplate::DO_NOT_STRIP);
+    ct::StringToTemplateCache("cue_template", template_cue, ctemplate::DO_NOT_STRIP);
 
     if (parse_directory(options.inputfolder, dict)) {
-        ctemplate::ExpandTemplate("cue_template", ctemplate::DO_NOT_STRIP, &dict, &output);
+        ct::ExpandTemplate("cue_template", ct::DO_NOT_STRIP, &dict, &output);
         PLOG_VERBOSE_IF(options.verbose) << output;
         fs::ofstream ofs(options.outputfile);
         ofs << output;
