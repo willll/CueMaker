@@ -15,12 +15,13 @@ find_package(Ctemplate  REQUIRED)
 
 find_package(Threads REQUIRED)
 
-
 set(SOURCE_FILES main.cpp)
 
 add_executable(cuemaker ${SOURCE_FILES})
 
-include_directories(${CTEMPLATE_INCLUDE_DIRS})
+include_directories( cuemaker
+                    ${CTEMPLATE_INCLUDE_DIRS}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/plog/include>)
 
 target_link_libraries( cuemaker LINK_PUBLIC
         ${Boost_LIBRARIES}

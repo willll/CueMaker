@@ -10,9 +10,8 @@
 #include <string>
 
 #include <boost/program_options.hpp>
-#include <boost/log/core.hpp>
-#include <boost/log/trivial.hpp>
-#include <boost/log/expressions.hpp>
+#include <plog/Log.h>
+
 #include "cli_options.h"
 
 namespace po = boost::program_options;
@@ -24,13 +23,13 @@ void help(const po::options_description &desc) {
 
 void ParseCli(int ac, char* av[], CliOptions & options) {
 
+    po::options_description desc("Allowed options");
     try {
-        po::options_description desc("Allowed options");
         desc.add_options()
                 ("help,h", "This output")
                 ("verbose,v", "Verbose")
                 ("output,o", po::value<string>(), "output cue file")
-                ("path,p,d", po::value<string>()->default_value("."), "path to generate the cue file from, default is current path");
+                ("path,p", po::value<string>()->default_value("."), "path to generate the cue file from, default is current path");
 
         po::variables_map vm;
         po::store(po::parse_command_line(ac, av, desc), vm);
@@ -47,26 +46,28 @@ void ParseCli(int ac, char* av[], CliOptions & options) {
 
         if (vm.count("output")) {
             options.outputfile = vm["output"].as<string>();
-            cout << "Output file :"
-                 <<  options.outputfile << ".\n";
+            PLOG_VERBOSE_IF(options.verbose) << "Output file :"
+                                            <<  options.outputfile << ".\n";
         } else {
-            cerr << "Output file is missing\n";
+            PLOG_FATAL << "Output file is missing\n";
             help(desc);
             exit(1);
         }
 
         if (vm.count("path")) {
             options.inputfolder = vm["path"].as<string>();
-            cout << "Input Folder :"
-                 <<  options.inputfolder << ".\n";
+            PLOG_VERBOSE_IF(options.verbose) << "Input Folder :"
+                                            <<  options.inputfolder << ".\n";
         }
     }
     catch(exception& e) {
-        cerr << "error: " << e.what() << "\n";
+        PLOG_FATAL << "error: " << e.what() << "\n";
+        help(desc);
         exit(1);
     }
     catch(...) {
-        cerr << "Exception of unknown type!\n";
+        PLOG_FATAL << "Exception of unknown type!\n";
+        help(desc);
         exit(1);
     }
 }

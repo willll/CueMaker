@@ -7,8 +7,8 @@
 
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
-
 #include <ctemplate/template.h>
+#include <plog/Log.h>
 
 #include "cli_options.h"
 #include "template.h"
@@ -18,10 +18,10 @@ namespace ct = ctemplate;
 
 bool find_file(const fs::path& dir_path, fs::path& file_found) {
     const fs::directory_iterator end;
-    const fs::path ext = ".iso";
+    const fs::path ext_iso = ".iso";
     const auto it = find_if(fs::directory_iterator(dir_path), end,
-                            [&ext](const fs::directory_entry& e) {
-                                return e.path().filename().extension() == ext;
+                            [&ext_iso](const fs::directory_entry& e) {
+                                return e.path().filename().extension() == ext_iso;
                             });
     if (it == end) {
         return false;
@@ -50,11 +50,18 @@ void generate_cue(const CliOptions & options) {
 
     ctemplate::StringToTemplateCache("cue_template", template_cue, ctemplate::DO_NOT_STRIP);
 
-    parse_directory(options.inputfolder, dict);
-
-    ctemplate::ExpandTemplate("cue_template", ctemplate::DO_NOT_STRIP, &dict, &output);
-
-    std::cout << output;
+    if (parse_directory(options.inputfolder, dict)) {
+        ctemplate::ExpandTemplate("cue_template", ctemplate::DO_NOT_STRIP, &dict, &output);
+        PLOG_VERBOSE_IF(options.verbose) << output;
+        fs::ofstream ofs(options.outputfile);
+        ofs << output;
+        ofs.close();
+        PLOG_VERBOSE_IF(options.verbose) << "Written into : " << options.outputfile;
+    } else {
+        PLOG_FATAL << "No ISO file found in : "
+                   << options.inputfolder
+                   << "\n";
+    }
 }
 
 #endif //CUEMAKER_GENERATE_CUE_H
