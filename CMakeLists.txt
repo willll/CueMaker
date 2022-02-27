@@ -5,6 +5,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/Modules/")
 
 set(CMAKE_CXX_STANDARD 14)
 
+set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_MULTITHREADED ON)
+
 find_package(Boost COMPONENTS
                     system
                     filesystem
@@ -31,7 +34,7 @@ include_directories( CueMaker
 target_link_libraries( CueMaker
                     PRIVATE
                     ${Boost_LIBRARIES}
-                    ${CTEMPLATE_LIBRARIES}/libctemplate.a
+                    ${CTEMPLATE_LIBRARIES}
                     Threads::Threads
                     )
 
