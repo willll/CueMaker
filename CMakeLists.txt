@@ -11,7 +11,9 @@ find_package(Boost COMPONENTS
                     program_options
             REQUIRED)
 
-find_package(Ctemplate REQUIRED)
+find_package(Ctemplate
+            HINT ENV ${CTEMPLATE_ROOT}
+            REQUIRED)
 
 find_package(Threads REQUIRED)
 
@@ -23,7 +25,7 @@ add_compile_options(-Wall -Wextra -pedantic -Werror)
 
 include_directories( CueMaker
                     ${CTEMPLATE_INCLUDE_DIRS}
-                    ${CMAKE_CURRENT_SOURCE_DIR}/plog/include
+                    ${CMAKE_CURRENT_SOURCE_DIR}/plog/inc    lude
                     )
 
 target_link_libraries( CueMaker
