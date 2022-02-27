@@ -28,12 +28,10 @@ include_directories( CueMaker
                     ${CMAKE_CURRENT_SOURCE_DIR}/plog/include
                     )
 
-link_directories(${CTEMPLATE_LIBRARIES})
-
 target_link_libraries( CueMaker
                     PRIVATE
                     ${Boost_LIBRARIES}
-                    libctemplate.a
+                    ${CTEMPLATE_LIBRARIES}/libctemplate.a
                     Threads::Threads
                     )
 
