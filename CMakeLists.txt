@@ -24,7 +24,7 @@ add_compile_options(-Wall -Wextra -pedantic -Werror)
 
 include_directories( CueMaker
                     ${CTEMPLATE_INCLUDE_DIRS}
-                    ${CMAKE_CURRENT_SOURCE_DIR}/plog/inc    lude
+                    ${CMAKE_CURRENT_SOURCE_DIR}/plog/include
                     )
 
 target_link_libraries( CueMaker
