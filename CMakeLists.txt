@@ -23,7 +23,7 @@ add_executable(CueMaker ${SOURCE_FILES})
 add_compile_options(-Wall -Wextra -pedantic -Werror)
 
 include_directories( CueMaker
-                    ${CTEMPLATE_INCLUDE_DIRS}
+                    ${CTEMPLATE_INCLUDE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/plog/include
                     )
 
