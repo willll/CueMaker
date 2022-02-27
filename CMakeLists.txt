@@ -24,8 +24,8 @@ include_directories( cuemaker
                     ${CMAKE_CURRENT_SOURCE_DIR}/plog/include>)
 
 target_link_libraries( cuemaker LINK_PUBLIC
-        ${Boost_LIBRARIES}
-        ${CTEMPLATE_LIBRARIES}
-        Threads::Threads)
+                    ${Boost_LIBRARIES}
+                    ${CTEMPLATE_LIBRARIES}
+                    Threads::Threads)
 
 install(TARGETS cuemaker DESTINATION .)
