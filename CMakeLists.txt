@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(cuemaker)
+project(CueMaker)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/Modules/")
 
@@ -11,21 +11,25 @@ find_package(Boost COMPONENTS
                     program_options
             REQUIRED)
 
-find_package(Ctemplate  REQUIRED)
+find_package(Ctemplate REQUIRED)
 
 find_package(Threads REQUIRED)
 
 set(SOURCE_FILES main.cpp)
 
-add_executable(cuemaker ${SOURCE_FILES})
+add_executable(CueMaker ${SOURCE_FILES})
 
-include_directories( cuemaker
+add_compile_options(-Wall -Wextra -pedantic -Werror)
+
+include_directories( CueMaker
                     ${CTEMPLATE_INCLUDE_DIRS}
-                    ${CMAKE_CURRENT_SOURCE_DIR}/plog/include>)
+                    ${CMAKE_CURRENT_SOURCE_DIR}/plog/include
+                    )
 
-target_link_libraries( cuemaker LINK_PUBLIC
+target_link_libraries( CueMaker
                     ${Boost_LIBRARIES}
                     ${CTEMPLATE_LIBRARIES}
-                    Threads::Threads)
+                    Threads::Threads
+                    )
 
-install(TARGETS cuemaker DESTINATION .)
+install(TARGETS CueMaker DESTINATION .)

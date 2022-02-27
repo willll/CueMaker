@@ -18,7 +18,7 @@ namespace fs = boost::filesystem;
 using namespace std;
 
 bool valid_path(const CliOptions & options) {
-    if (options.inputfolder.compare(".")) {
+    if (options.inputfolder.compare(fs::path("."))) {
         if (!fs::exists(options.inputfolder)) {
             PLOG_FATAL << "Input path does not exist : "
                 << options.inputfolder
