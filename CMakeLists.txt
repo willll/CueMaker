@@ -12,7 +12,7 @@ find_package(Boost COMPONENTS
             REQUIRED)
 
 find_package(Ctemplate
-            HINT ENV ${CTEMPLATE_ROOT}
+            HINTS ENV ${CTEMPLATE_ROOT}
             REQUIRED)
 
 find_package(Threads REQUIRED)
