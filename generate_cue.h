@@ -7,14 +7,15 @@
 
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
-#include <ctemplate/template.h>
+
 #include <plog/Log.h>
+#include <inja.hpp>
 
 #include "cli_options.h"
 #include "template.h"
 
 namespace fs = boost::filesystem;
-namespace ct = ctemplate;
+
 
 bool find_file(const fs::path& dir_path, fs::path& file_found) {
     const fs::directory_iterator end;
@@ -31,7 +32,7 @@ bool find_file(const fs::path& dir_path, fs::path& file_found) {
     }
 }
 
-bool parse_directory(const fs::path & inputfolder, ct::TemplateDictionary & dict) {
+bool parse_directory(const fs::path & inputfolder, inja::json & dict) {
     bool bReturn = false;
     fs::path file_found;
 
@@ -45,13 +46,11 @@ bool parse_directory(const fs::path & inputfolder, ct::TemplateDictionary & dict
 
 void generate_cue(const CliOptions & options) {
 
-    ct::TemplateDictionary dict("cue_file");
+    inja::json dict;
     std::string output;
 
-    ct::StringToTemplateCache("cue_template", template_cue, ctemplate::DO_NOT_STRIP);
-
     if (parse_directory(options.inputfolder, dict)) {
-        ct::ExpandTemplate("cue_template", ct::DO_NOT_STRIP, &dict, &output);
+        output = inja::render(template_cue, dict);
         PLOG_VERBOSE_IF(options.verbose) << output;
         fs::ofstream ofs(options.outputfile);
         ofs << output;

@@ -1,3 +1,6 @@
 [submodule "plog"]
 	path = plog
 	url = https://github.com/SergiusTheBest/plog
+[submodule "inja"]
+	path = inja
+	url = https://github.com/pantor/inja
