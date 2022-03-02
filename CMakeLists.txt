@@ -4,16 +4,12 @@ project(CueMaker)
 set(CMAKE_CXX_STANDARD 17)
 
 set(Boost_USE_STATIC_LIBS ON)
-set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_MULTITHREADED OFF)
 set(BUILD_SHARED_LIBS FALSE)
 
 find_package(Boost COMPONENTS
-                    system
-                    filesystem
                     program_options
             REQUIRED)
-
-find_package(Threads REQUIRED)
 
 set(SOURCE_FILES main.cpp)
 
