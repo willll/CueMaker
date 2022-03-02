@@ -6,15 +6,14 @@
 #define CUEMAKER_FSSANITY_H
 
 #include <iostream>
+#include <fstream>
+#include <filesystem>
 
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
-#include <boost/filesystem/fstream.hpp>
 #include <plog/Log.h>
 
 #include "cli_options.h"
 
-namespace fs = boost::filesystem;
+namespace fs = std::filesystem;
 using namespace std;
 
 bool valid_path(const CliOptions & options) {
@@ -34,7 +33,7 @@ bool valid_path(const CliOptions & options) {
         }
 
         try {
-            fs::wofstream ofs(options.outputfile);
+            std::wofstream ofs(options.outputfile);
             ofs.close();
         }
         catch(exception& e) {

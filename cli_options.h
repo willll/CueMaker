@@ -5,13 +5,11 @@
 #ifndef CUEMAKER_CLI_OPTIONS_H
 #define CUEMAKER_CLI_OPTIONS_H
 
-#include <boost/filesystem/path.hpp>
-
-namespace fs = boost::filesystem;
+#include <filesystem>
 
 struct CliOptions{
-    fs::path outputfile;
-    fs::path inputfolder;
+    std::filesystem::path outputfile;
+    std::filesystem::path inputfolder;
     bool verbose = false;
 };
 

@@ -5,8 +5,8 @@
 #ifndef CUEMAKER_GENERATE_CUE_H
 #define CUEMAKER_GENERATE_CUE_H
 
-#include <boost/filesystem.hpp>
-#include <boost/filesystem/path.hpp>
+#include <fstream>
+#include <filesystem>
 
 #include <plog/Log.h>
 #include <inja.hpp>
@@ -14,8 +14,7 @@
 #include "cli_options.h"
 #include "template.h"
 
-namespace fs = boost::filesystem;
-
+namespace fs = std::filesystem;
 
 bool find_file(const fs::path& dir_path, fs::path& file_found) {
     const fs::directory_iterator end;
@@ -52,7 +51,7 @@ void generate_cue(const CliOptions & options) {
     if (parse_directory(options.inputfolder, dict)) {
         output = inja::render(template_cue, dict);
         PLOG_VERBOSE_IF(options.verbose) << output;
-        fs::ofstream ofs(options.outputfile);
+        std::ofstream ofs(options.outputfile);
         ofs << output;
         ofs.close();
         PLOG_VERBOSE_IF(options.verbose) << "Written into : " << options.outputfile;
