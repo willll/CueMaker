@@ -8,8 +8,8 @@
 #include <fstream>
 #include <filesystem>
 
-#include <plog/Log.h>
-#include <inja.hpp>
+#include "plog/Log.h"
+#include "inja.hpp"
 
 #include "cli_options.h"
 #include "template.h"

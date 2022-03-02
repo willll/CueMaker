@@ -11,7 +11,7 @@ find_package(Boost COMPONENTS
                     program_options
             REQUIRED)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES src/main.cpp)
 
 add_executable(CueMaker ${SOURCE_FILES})
 

@@ -10,7 +10,7 @@
 #include <string>
 
 #include <boost/program_options.hpp>
-#include <plog/Log.h>
+#include "plog/Log.h"
 
 #include "cli_options.h"
 

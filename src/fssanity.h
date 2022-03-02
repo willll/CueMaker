@@ -9,7 +9,7 @@
 #include <fstream>
 #include <filesystem>
 
-#include <plog/Log.h>
+#include "plog/Log.h"
 
 #include "cli_options.h"
 
