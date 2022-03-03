@@ -5,7 +5,7 @@ and generates a basic .cue file.
 
 ##How to use :
 
-CueMaker -o </.../my_file>.cue -p <folder to scan>
+CueMaker -o </.../my_file>.cue -p < folder to scan >
 
 It will output a .cue file in the current directory of no path provided.
 
